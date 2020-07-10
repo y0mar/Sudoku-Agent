@@ -24,6 +24,12 @@ public class driver {
 		Puzzle sudoku = new Puzzle();
 		sudoku.load(file);
 		
+		for (int i = 0; i < sudoku.emptyCells.size(); i++) {
+			sudoku.updateRV(sudoku.emptyCells.get(i));
+		}
+		
+		sudoku.emptyCells = sudoku.selectionSort(sudoku.emptyCells);
+		
 		for (int row = 0; row < sudoku.puzzle.length; row++) {
 			for (int col = 0; col < sudoku.puzzle[row].length; col++) {
 				System.out.print(sudoku.puzzle[row][col].val);
@@ -31,6 +37,10 @@ public class driver {
 			System.out.println();
 		}
 		
+		System.out.println("Empty cells by MRV: ");
+		for (int i = 0; i < sudoku.emptyCells.size(); i++) {
+			System.out.print("("+sudoku.emptyCells.get(i).row+","+sudoku.emptyCells.get(i).col+"), ");
+		}
 	}
 	
 }
