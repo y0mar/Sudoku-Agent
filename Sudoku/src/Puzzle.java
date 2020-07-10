@@ -19,6 +19,7 @@ public class Puzzle {
 	
 	
 	void updateRV(Cell cell) {
+		cell.remainingValues.removeAll(boxes[cell.box].values);
 		for (int index = 0; index < 16; index++) {
 			if (cell.remainingValues.contains((Character)puzzle[index][cell.col].val)) {
 				cell.remainingValues.remove((Character)puzzle[index][cell.col].val);
@@ -26,8 +27,8 @@ public class Puzzle {
 			if (cell.remainingValues.contains((Character)puzzle[cell.row][index].val)) {
 				cell.remainingValues.remove((Character)puzzle[cell.row][index].val);
 			}
-			cell.remainingValues.removeAll(boxes[cell.box].values);
 		}
+		cell.countRV = cell.remainingValues.size();
 	}
 	
 	ArrayList<Cell> selectionSort(ArrayList<Cell> cellList) {
