@@ -18,6 +18,10 @@ public class Agent {
 				puzzle.boxes[emptyCellList.get(0).box].values.add(emptyCellList.get(0).remainingValues.get(0));
 				ArrayList<Cell> newEmptyCellList = new ArrayList<Cell>(emptyCellList);
 				newEmptyCellList.remove(0);
+				/**for (int i = 0; i < newEmptyCellList.size(); i++) {
+					puzzle.updateRV(newEmptyCellList.get(i));
+				}
+				newEmptyCellList = puzzle.selectionSort(newEmptyCellList);**/
 				//printNextEmptyCells(newEmptyCellList); printPuzzle(puzzle);
 				success = backTrackSearch(newEmptyCellList, puzzle);
 				if (puzzle.goalTest()) {
