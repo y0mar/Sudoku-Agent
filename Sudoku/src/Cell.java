@@ -1,12 +1,12 @@
 import java.util.*;
 
 public class Cell implements Comparable<Cell> {
-	
+	ArrayList<Character> originalRV = new ArrayList<Character>(Puzzle.domain);
 	
 	
 	char val = '-';
 	int row, col, box;
-	ArrayList<Character> remainingValues = new ArrayList<Character>(Puzzle.domain);
+	ArrayList<Character> remainingValues = new ArrayList<Character>(originalRV);
 	int countRV;
 	
 	Cell() {
@@ -18,7 +18,7 @@ public class Cell implements Comparable<Cell> {
 
 	@Override
 	public int compareTo(Cell anotherCell) {
-		if (this.remainingValues.size() < anotherCell.remainingValues.size()) {
+		if (this.originalRV.size() < anotherCell.originalRV.size()) {
 			return -1;
 		} else {
 			return 1;

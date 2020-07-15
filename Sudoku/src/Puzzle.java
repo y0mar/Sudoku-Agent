@@ -16,19 +16,41 @@ public class Puzzle {
 	}
 	
 	
-	
+	boolean goalTest() {
+		for (int i = 0; i < puzzle.length; i++) {
+			for (int j = 0; j < puzzle[i].length; j++) {
+				if (puzzle[i][j].val == '-') {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 	
 	void updateRV(Cell cell) {
 		cell.remainingValues.removeAll(boxes[cell.box].values);
 		for (int index = 0; index < 16; index++) {
-			if (cell.remainingValues.contains((Character)puzzle[index][cell.col].val)) {
+			if (cell.remainingValues.contains((Character)puzzle[index][cell.col].val) && (index != cell.row)) {
 				cell.remainingValues.remove((Character)puzzle[index][cell.col].val);
 			}
-			if (cell.remainingValues.contains((Character)puzzle[cell.row][index].val)) {
+			if (cell.remainingValues.contains((Character)puzzle[cell.row][index].val) && (index != cell.col)) {
 				cell.remainingValues.remove((Character)puzzle[cell.row][index].val);
 			}
 		}
 		cell.countRV = cell.remainingValues.size();
+	}
+	
+	void updateOriginalRV(Cell cell) {
+		cell.originalRV.removeAll(boxes[cell.box].values);
+		for (int index = 0; index < 16; index++) {
+			if (cell.originalRV.contains((Character)puzzle[index][cell.col].val) && (index != cell.row)) {
+				cell.originalRV.remove((Character)puzzle[index][cell.col].val);
+			}
+			if (cell.originalRV.contains((Character)puzzle[cell.row][index].val) && (index != cell.col)) {
+				cell.originalRV.remove((Character)puzzle[cell.row][index].val);
+			}
+		}
+		cell.countRV = cell.originalRV.size();
 	}
 	
 	ArrayList<Cell> selectionSort(ArrayList<Cell> cellList) {

@@ -11,12 +11,16 @@ public class driver {
 		dialog.setDirectory("C://");
 		dialog.setFile("*.txt");
 		dialog.setVisible(true);
+		Scanner input = new Scanner(System.in);
 		
 		String filename = dialog.getFile();
 		File file = new File(dialog.getDirectory() + filename);
 		
 		if(filename == null) {
 			System.out.println("You cancelled the choice");
+			input.close();
+			frame.dispose();
+			dialog.dispose();
 			}
 		else {
 			System.out.println("You chose: " + filename);
@@ -25,10 +29,24 @@ public class driver {
 			sudoku.load(file);
 			
 			for (int i = 0; i < sudoku.emptyCells.size(); i++) {
-				sudoku.updateRV(sudoku.emptyCells.get(i));
+				sudoku.updateOriginalRV(sudoku.emptyCells.get(i));
 			}
 			
-			sudoku.emptyCells = sudoku.selectionSort(sudoku.emptyCells);
+			//sudoku.emptyCells = sudoku.selectionSort(sudoku.emptyCells);
+			
+			System.out.println("Enter 0 for uninformed agent solution, 1 for CSP agent solution: ");
+			int choice = input.nextInt();
+			
+			boolean success = false;
+			if (choice == 0) {
+				DummyAgent dumbo = new DummyAgent();
+				success = dumbo.performUninformedSearch(sudoku);
+				System.out.println("\nTotal assignments attempted: " + dumbo.assignments);
+			} else if (choice == 1) {
+				CSPAgent smarty = new CSPAgent();
+				success = smarty.performMRVSearch(sudoku);
+				System.out.println("\nTotal assignments attempted: " + smarty.assignments);
+			}
 			
 			for (int row = 0; row < sudoku.puzzle.length; row++) {
 				for (int col = 0; col < sudoku.puzzle[row].length; col++) {
@@ -37,13 +55,16 @@ public class driver {
 				System.out.println();
 			}
 			
-			System.out.println("Empty cells by MRV: ");
+			/**System.out.println("Empty cells by MRV: ");
 			for (int i = 0; i < sudoku.emptyCells.size(); i++) {
 				System.out.print("("+sudoku.emptyCells.get(i).row+","+sudoku.emptyCells.get(i).col+"), "+sudoku.emptyCells.get(i).countRV+"\t");
 				if ((i+1)%5==0) {
 					System.out.print("\n");
 				}
-			}
+			}**/
+			input.close();
+			frame.dispose();
+			dialog.dispose();
 		}		
 	}	
 }
