@@ -32,8 +32,6 @@ public class driver {
 				sudoku.updateOriginalRV(sudoku.emptyCells.get(i));
 			}
 			
-			//sudoku.emptyCells = sudoku.selectionSort(sudoku.emptyCells);
-			
 			System.out.println("Enter 0 for uninformed agent solution, 1 for CSP agent solution: ");
 			int choice = input.nextInt();
 			
@@ -55,6 +53,7 @@ public class driver {
 				System.out.println();
 			}
 			
+			//used for checking next five empty cells and their # of remaining values in emtpyCell list
 			/**System.out.println("Empty cells by MRV: ");
 			for (int i = 0; i < sudoku.emptyCells.size(); i++) {
 				System.out.print("("+sudoku.emptyCells.get(i).row+","+sudoku.emptyCells.get(i).col+"), "+sudoku.emptyCells.get(i).countRV+"\t");

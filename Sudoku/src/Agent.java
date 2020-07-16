@@ -1,15 +1,13 @@
 import java.util.*;
 
 public class Agent {
-	int assignments = 0;
+	long assignments = 0;
 	
 	
 	boolean backTrackSearch(ArrayList<Cell> emptyCellList, Puzzle puzzle) {
 		boolean success = false;
 		while (!emptyCellList.isEmpty()) {
-			if (assignments == 395) {
-				System.out.println("395 assignments");
-			}
+			
 			puzzle.updateRV(emptyCellList.get(0));
 			while (!emptyCellList.get(0).remainingValues.isEmpty()) {
 				
@@ -18,11 +16,6 @@ public class Agent {
 				puzzle.boxes[emptyCellList.get(0).box].values.add(emptyCellList.get(0).remainingValues.get(0));
 				ArrayList<Cell> newEmptyCellList = new ArrayList<Cell>(emptyCellList);
 				newEmptyCellList.remove(0);
-				/**for (int i = 0; i < newEmptyCellList.size(); i++) {
-					puzzle.updateRV(newEmptyCellList.get(i));
-				}
-				newEmptyCellList = puzzle.selectionSort(newEmptyCellList);**/
-				//printNextEmptyCells(newEmptyCellList); printPuzzle(puzzle);
 				success = backTrackSearch(newEmptyCellList, puzzle);
 				if (puzzle.goalTest()) {
 					return true;

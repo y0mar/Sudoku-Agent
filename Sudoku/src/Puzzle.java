@@ -3,7 +3,7 @@ import java.io.*;
 
 
 public class Puzzle {
-	static int assignments = 0;
+	
 	Cell puzzle[][] = new Cell[16][16];
 	Box boxes[] = new Box[16];
 	ArrayList<Cell> emptyCells = new ArrayList<Cell>();
@@ -147,8 +147,6 @@ public class Puzzle {
 				if ((row >= 12 && row <= 15) && (col >= 12 && col <= 15)) {
 					puzzle[row][col].box = 15;
 				}
-				
-				
 				
 			}
 			
