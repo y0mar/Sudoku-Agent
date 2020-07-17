@@ -7,7 +7,7 @@ public class Puzzle {
 	Cell puzzle[][] = new Cell[16][16];
 	Box boxes[] = new Box[16];
 	ArrayList<Cell> emptyCells = new ArrayList<Cell>();
-	static final ArrayList<Character> domain = new ArrayList<Character>();
+	final ArrayList<Character> domain = new ArrayList<Character>();
 	
 	Puzzle() {
 		initDomain();
@@ -95,7 +95,7 @@ public class Puzzle {
 	void init() {
 		for (int row = 0; row < puzzle.length; row++) {
 			for (int col = 0; col < puzzle[row].length; col++) {
-				puzzle[row][col] = new Cell();
+				puzzle[row][col] = new Cell(domain);
 				puzzle[row][col].row = row;
 				puzzle[row][col].col = col;
 				

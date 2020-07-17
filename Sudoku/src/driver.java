@@ -15,6 +15,7 @@ public class driver {
 		
 		String filename = dialog.getFile();
 		File file = new File(dialog.getDirectory() + filename);
+		File file2 = new File(dialog.getDirectory() + filename);
 		
 		if(filename == null) {
 			System.out.println("You cancelled the choice");
@@ -25,30 +26,46 @@ public class driver {
 		else {
 			System.out.println("You chose: " + filename);
 			
-			Puzzle sudoku = new Puzzle();
-			sudoku.load(file);
+			Puzzle sudoku1 = new Puzzle();
+			Puzzle sudoku2 = new Puzzle();
+			sudoku1.load(file); 
+			sudoku2.load(file2);
 			
-			for (int i = 0; i < sudoku.emptyCells.size(); i++) {
-				sudoku.updateOriginalRV(sudoku.emptyCells.get(i));
+			
+			for (int i = 0; i < sudoku1.emptyCells.size(); i++) {
+				sudoku1.updateOriginalRV(sudoku1.emptyCells.get(i));
 			}
 			
-			System.out.println("Enter 0 for uninformed agent solution, 1 for CSP agent solution: ");
-			int choice = input.nextInt();
+			
+			for (int i = 0; i < sudoku2.emptyCells.size(); i++) {
+				sudoku2.updateOriginalRV(sudoku2.emptyCells.get(i));
+			}
+			
+			//System.out.println("Enter 0 for uninformed agent solution, 1 for CSP agent solution: ");
+			//int choice = input.nextInt();
 			
 			boolean success = false;
-			if (choice == 0) {
+			//if (choice == 0) {
 				DummyAgent dumbo = new DummyAgent();
-				success = dumbo.performUninformedSearch(sudoku);
-				System.out.println("\nTotal assignments attempted: " + dumbo.assignments);
-			} else if (choice == 1) {
+				success = dumbo.performUninformedSearch(sudoku1);
+				System.out.println("\nUninformed search agent total assignments attempted: " + dumbo.assignments);
+				
+				for (int row = 0; row < sudoku1.puzzle.length; row++) {
+					for (int col = 0; col < sudoku1.puzzle[row].length; col++) {
+						System.out.print(sudoku1.puzzle[row][col].val);
+					}
+					System.out.println();
+				}
+				
+			//} else if (choice == 1) {
 				CSPAgent smarty = new CSPAgent();
-				success = smarty.performMRVSearch(sudoku);
-				System.out.println("\nTotal assignments attempted: " + smarty.assignments);
-			}
+				success = smarty.performMRVSearch(sudoku2);
+				System.out.println("\nCSP agent total assignments attempted: " + smarty.assignments);
+			//}
 			
-			for (int row = 0; row < sudoku.puzzle.length; row++) {
-				for (int col = 0; col < sudoku.puzzle[row].length; col++) {
-					System.out.print(sudoku.puzzle[row][col].val);
+			for (int row = 0; row < sudoku2.puzzle.length; row++) {
+				for (int col = 0; col < sudoku2.puzzle[row].length; col++) {
+					System.out.print(sudoku2.puzzle[row][col].val);
 				}
 				System.out.println();
 			}

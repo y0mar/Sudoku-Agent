@@ -1,15 +1,18 @@
 import java.util.*;
 
 public class Cell implements Comparable<Cell> {
-	ArrayList<Character> originalRV = new ArrayList<Character>(Puzzle.domain);
+	
+	ArrayList<Character> originalRV = new ArrayList<Character>();
 	
 	
 	char val = '-';
 	int row, col, box;
-	ArrayList<Character> remainingValues = new ArrayList<Character>(originalRV);
+	ArrayList<Character> remainingValues = new ArrayList<Character>();
 	int countRV;
 	
-	Cell() {
+	Cell(ArrayList<Character> domain) {
+		originalRV = new ArrayList<Character>(domain);
+		remainingValues = new ArrayList<Character>(domain);
 	}
 	
 	Cell(char value) {
